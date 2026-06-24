@@ -1,0 +1,48 @@
+name: scrub-gate
+
+# Authoritative no-personal-info gate for the public mirror (PLN-02 DD-3, chain 11bb6a).
+# Two layers protect this public repo:
+#   1. Engine-side (agent-publisher publish.py scrub_gate) — fail-closed pre-push filter; a leak
+#      never reaches the push step.
+#   2. This CI job — the authoritative tripwire: fails LOUDLY if any secret (gitleaks) or
+#      personal-info pattern (paths / email) reaches the repo despite layer 1.
+# Remediation if a leak ever lands in history: git-filter-repo --replace-text locally, then
+# force-push the rewritten history (heavy — kept as a runbook, not a per-push step).
+#
+# Action versions are SHA-pinned (mutable tags are a supply-chain risk on a security gate).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scrub-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: gitleaks secret scan
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Free for individual / public repos — no GITLEAKS_LICENSE required.
+
+      - name: personal-info scrub gate
+        run: |
+          # Fail closed on any personal path / email reaching the public mirror (G6).
+          # .github is excluded: this workflow file itself contains the forbidden tokens as
+          # regex literals, which would otherwise self-match. CI config is curated, not content.
+          if grep -rInE 'anznkv|/Users/[A-Za-z0-9._-]+|@pm\.me' . \
+               --exclude-dir=.git --exclude-dir=.github; then
+            echo "::error::personal-info pattern found — scrub gate FAILED (G6)"
+            exit 1
+          fi
+          echo "scrub gate PASS — no personal-info pattern in published content"
