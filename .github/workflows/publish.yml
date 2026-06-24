@@ -38,11 +38,11 @@ jobs:
 
       - name: personal-info scrub gate
         run: |
-          # Fail closed on any personal path / email reaching the public mirror (G6).
-          # .github is excluded: this workflow file itself contains the forbidden tokens as
-          # regex literals, which would otherwise self-match. CI config is curated, not content.
-          if grep -rInE 'anznkv|/Users/[A-Za-z0-9._-]+|@pm\.me' . \
-               --exclude-dir=.git --exclude-dir=.github; then
+          # Fail closed on any personal path / ANY email reaching the public mirror (G6).
+          # Only this workflow file is excluded (it carries the patterns as regex literals and
+          # would self-match); the rest of .github is still scanned for personal info.
+          if grep -rInE 'anznkv|/Users/[A-Za-z0-9._-]+|[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' . \
+               --exclude-dir=.git --exclude=publish.yml; then
             echo "::error::personal-info pattern found — scrub gate FAILED (G6)"
             exit 1
           fi
