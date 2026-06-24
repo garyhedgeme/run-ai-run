@@ -1,0 +1,9 @@
+# run-ai-run is public, curated content only — nothing personal lands here.
+.DS_Store
+*.swp
+*~
+node_modules/
+.venv/
+__pycache__/
+.idea/
+.vscode/
