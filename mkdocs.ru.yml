@@ -1,0 +1,78 @@
+site_name: run-ai-run
+site_url: https://garyhedgeme.github.io/run-ai-run/ru/
+site_description: Публичные заметки по работе с кодинг-агентами
+docs_dir: docs-ru
+site_dir: site/ru
+
+theme:
+  name: material
+  language: ru
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Тёмная тема
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Светлая тема
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+    - toc.follow
+
+nav:
+  - Главная: index.md
+  - Саммари:
+      - summaries/building-great-agent-skills.md
+  - Гайды:
+      - guides/claude-md-masterclass.md
+  - Блог:
+      - blog/index.md
+
+plugins:
+  - search:
+      lang:
+        - ru
+  - tags
+  - blog:
+      blog_dir: blog
+      post_url_format: "{date}/{slug}"
+      post_date_format: long
+      categories: true
+      authors: true
+  - social:
+      cards: !ENV [CI, false]
+
+extra:
+  alternate:
+    - name: English
+      link: /run-ai-run/
+      lang: en
+    - name: Русский
+      link: /run-ai-run/ru/
+      lang: ru
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
