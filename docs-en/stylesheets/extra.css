@@ -1,0 +1,176 @@
+/* run-ai-run — "warm-black terminal" design (ported from run-ai-run.dc.html)
+   Palette + type + component reskin over Material for MkDocs. Dark scheme = the design. */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  --rar-bg: #0d0c0b;
+  --rar-panel: #141210;
+  --rar-line: rgba(244, 241, 236, .11);
+  --rar-ink: #f4f1ec;
+  --rar-muted: rgba(244, 241, 236, .56);
+  --rar-acc: #ff9d3d;   /* amber */
+  --rar-acc-2: #3fd0e0; /* cyan  */
+}
+
+/* ---- dark scheme carries the full design ---- */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: var(--rar-bg);
+  --md-default-fg-color: var(--rar-ink);
+  --md-default-fg-color--light: var(--rar-muted);
+  --md-default-fg-color--lighter: rgba(244, 241, 236, .32);
+  --md-default-fg-color--lightest: rgba(244, 241, 236, .12);
+  --md-primary-fg-color: #0d0c0b;
+  --md-primary-bg-color: var(--rar-ink);
+  --md-accent-fg-color: var(--rar-acc);
+  --md-typeset-color: rgba(244, 241, 236, .85);
+  --md-typeset-a-color: var(--rar-acc);
+  --md-code-bg-color: #0a0908;
+  --md-code-fg-color: #d7d2c8;
+  --md-footer-bg-color: #0a0908;
+  --md-footer-fg-color: var(--rar-ink);
+}
+::selection { background: rgba(255, 157, 61, .3); }
+
+/* light scheme keeps the amber accent identity */
+[data-md-color-scheme="default"] {
+  --md-accent-fg-color: var(--rar-acc);
+  --md-typeset-a-color: #c8791f;
+}
+
+/* ---- type: Space Grotesk display headings ---- */
+.md-typeset h1, .md-typeset h2, .md-typeset h3,
+.md-header__title, .md-nav__title, .rar-hero h1 {
+  font-family: 'Space Grotesk', 'IBM Plex Sans', sans-serif;
+  letter-spacing: -.02em;
+}
+.md-typeset h1 { font-weight: 700; letter-spacing: -.03em; color: var(--rar-ink); }
+.md-typeset h2 { font-weight: 700; }
+
+/* ---- header: dark, blurred, hairline ---- */
+[data-md-color-scheme="slate"] .md-header {
+  background: rgba(13, 12, 11, .8);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--rar-line);
+  box-shadow: none;
+}
+
+/* ---- links: amber + underline-on-hover (design register) ---- */
+[data-md-color-scheme="slate"] .md-typeset a:not(.md-button) {
+  color: var(--rar-acc);
+  border-bottom: 1px solid rgba(255, 157, 61, .32);
+}
+[data-md-color-scheme="slate"] .md-typeset a:not(.md-button):hover {
+  color: var(--rar-acc);
+  border-bottom-color: var(--rar-acc);
+}
+/* nav / toc / header links keep the theme's own treatment (no amber underline) */
+[data-md-color-scheme="slate"] .md-nav__link,
+[data-md-color-scheme="slate"] .md-header a { border-bottom: 0; }
+
+/* ---- code ---- */
+[data-md-color-scheme="slate"] .md-typeset .highlight,
+[data-md-color-scheme="slate"] .md-typeset pre > code {
+  border: 1px solid var(--rar-line);
+  border-radius: 13px;
+}
+[data-md-color-scheme="slate"] .md-typeset :not(pre) > code {
+  background: rgba(255, 255, 255, .06);
+  color: var(--rar-acc-2);
+}
+
+/* ---- blockquote: amber left rule ---- */
+[data-md-color-scheme="slate"] .md-typeset blockquote {
+  border-left: 2px solid var(--rar-acc);
+  color: var(--rar-muted);
+  font-style: italic;
+}
+
+/* ---- tables: panel + rounded ---- */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  border: 1px solid var(--rar-line);
+  border-radius: 12px;
+  background: var(--rar-panel);
+  overflow: hidden;
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th { background: #1b1815; }
+
+/* ---- admonitions / details: panel + rounded ---- */
+[data-md-color-scheme="slate"] .md-typeset .admonition,
+[data-md-color-scheme="slate"] .md-typeset details {
+  border: 1px solid var(--rar-line);
+  border-radius: 13px;
+  background: var(--rar-panel);
+}
+
+/* ---- grid cards: panel + amber hover lift ---- */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li,
+[data-md-color-scheme="slate"] .md-typeset .grid > .card {
+  border: 1px solid var(--rar-line);
+  border-radius: 15px;
+  background: var(--rar-panel);
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li:hover {
+  border-color: rgba(255, 157, 61, .45);
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px -28px rgba(0, 0, 0, .9);
+}
+
+/* ---- buttons ---- */
+.md-typeset .md-button { border-radius: 11px; font-weight: 600; }
+[data-md-color-scheme="slate"] .md-typeset .md-button {
+  border-color: var(--rar-line);
+  color: var(--rar-ink);           /* ghost button: ink text, not the link-blue default */
+}
+[data-md-color-scheme="slate"] .md-typeset .md-button:hover:not(.md-button--primary) {
+  border-color: rgba(244, 241, 236, .28);
+  color: var(--rar-ink);
+  background: rgba(255, 255, 255, .02);
+}
+.md-typeset .md-button--primary {
+  background: var(--rar-acc);
+  color: #181206;
+  border-color: var(--rar-acc);
+  box-shadow: 0 10px 34px -12px var(--rar-acc);
+}
+.md-typeset .md-button--primary:hover {
+  background: #ffad57; border-color: #ffad57; color: #181206;
+  transform: translateY(-2px);
+}
+
+/* ---- eyebrow (mono uppercase, amber) ---- */
+.rar-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--rar-acc); display: inline-block;
+}
+
+/* ---- HERO (home) ---- */
+.rar-hero {
+  position: relative; overflow: hidden;
+  margin: -1.2rem -.8rem 2.6rem; padding: 5rem 1.4rem 4rem;
+  border-bottom: 1px solid var(--rar-line);
+}
+.rar-hero::before {
+  content: ""; position: absolute; left: 50%; top: -170px;
+  width: 620px; height: 620px; transform: translateX(-50%); border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,157,61,.30), rgba(255,157,61,.05) 46%, transparent 70%);
+  pointer-events: none;
+}
+.rar-hero > * { position: relative; }
+.rar-hero h1 {
+  font-size: clamp(40px, 7vw, 84px); line-height: .98;
+  letter-spacing: -.035em; margin: .5rem 0 0;
+}
+.rar-hero .glow { color: var(--rar-acc); text-shadow: 0 0 34px rgba(255, 157, 61, .5); }
+.rar-hero .rar-lead {
+  font-size: 1.15rem; line-height: 1.62; color: var(--rar-muted);
+  max-width: 34em; margin: 1.4rem 0 0;
+}
+.rar-hero .rar-cta { display: flex; gap: .8rem; margin-top: 2rem; flex-wrap: wrap; }
+.rar-tags {
+  display: flex; gap: 1.5rem; margin-top: 2.6rem; flex-wrap: wrap;
+  font-family: 'IBM Plex Mono', monospace; font-size: .8rem; color: var(--rar-muted);
+}
+.rar-tags b { color: var(--rar-ink); font-weight: 500; }

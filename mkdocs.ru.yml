@@ -7,17 +7,22 @@ site_dir: site/ru
 theme:
   name: material
   language: ru
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
   palette:
-    - scheme: default
-      primary: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Тёмная тема
-    - scheme: slate
-      primary: indigo
+    - scheme: slate            # dark-first: дизайн run-ai-run "warm-black terminal"
+      primary: black
+      accent: deep orange
       toggle:
         icon: material/brightness-4
         name: Светлая тема
+    - scheme: default
+      primary: black
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Тёмная тема
   features:
     - navigation.sections
     - navigation.top
@@ -26,6 +31,9 @@ theme:
     - search.suggest
     - search.highlight
     - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
 
 nav:
   - Главная: index.md
