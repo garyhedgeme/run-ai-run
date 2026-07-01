@@ -5,6 +5,9 @@ hide:
 ---
 
 <div class="rar-hero" markdown>
+<div class="rar-floor"></div>
+<div class="rar-rain"></div>
+<div class="rar-scan"></div>
 <span class="rar-eyebrow">Публичные заметки · работа с кодинг-агентами</span>
 
 # Запусти агента.<br><span class="glow">Запусти заметки.</span>
