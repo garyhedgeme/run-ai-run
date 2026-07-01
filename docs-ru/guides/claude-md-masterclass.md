@@ -1,5 +1,3 @@
----
----
 
 # CLAUDE.md as Configuration, Not Documentation
 
