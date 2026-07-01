@@ -7,17 +7,22 @@ site_dir: site
 theme:
   name: material
   language: en
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
   palette:
-    - scheme: default
-      primary: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
+    - scheme: slate            # dark-first: the run-ai-run "warm-black terminal" design
+      primary: black
+      accent: deep orange
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+    - scheme: default
+      primary: black
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
   features:
     - navigation.sections
     - navigation.top
@@ -26,6 +31,9 @@ theme:
     - search.suggest
     - search.highlight
     - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
 
 nav:
   - Home: index.md
