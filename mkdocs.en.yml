@@ -11,18 +11,9 @@ theme:
     text: IBM Plex Sans
     code: IBM Plex Mono
   palette:
-    - scheme: slate            # dark-first: the run-ai-run "warm-black terminal" design
-      primary: black
-      accent: deep orange
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-    - scheme: default
-      primary: black
-      accent: deep orange
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
+    scheme: slate              # dark-ONLY (single mapping, no toggle) — the design is dark-only;
+    primary: black             # a single-entry palette disables the light scheme entirely
+    accent: deep orange
   features:
     - navigation.sections
     - navigation.top

@@ -174,3 +174,49 @@
   font-family: 'IBM Plex Mono', monospace; font-size: .8rem; color: var(--rar-muted);
 }
 .rar-tags b { color: var(--rar-ink); font-weight: 500; }
+
+/* ---- HERO decorative layers (ported from run-ai-run.dc.html) ---- */
+.rar-hero .rar-floor {
+  position: absolute; left: -25%; right: -25%; bottom: -60px; height: 360px;
+  transform: perspective(420px) rotateX(74deg); transform-origin: bottom;
+  background:
+    repeating-linear-gradient(90deg, transparent, transparent 76px, rgba(63,208,224,.16) 77px, rgba(63,208,224,.16) 79px),
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(63,208,224,.10) 41px, rgba(63,208,224,.10) 43px);
+  -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 80%);
+  mask-image: linear-gradient(to top, #000 10%, transparent 80%);
+  opacity: .5; pointer-events: none; z-index: 0;
+}
+.rar-hero .rar-rain {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .35;
+  background-image: repeating-linear-gradient(102deg, transparent, transparent 7px, rgba(255,255,255,.045) 7px, rgba(255,255,255,.045) 8px);
+  animation: rar-rain 4.5s linear infinite;
+}
+@keyframes rar-rain { to { background-position: 60px 240px; } }
+.rar-hero .rar-scan {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; mix-blend-mode: overlay;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,0) 2px, rgba(0,0,0,.14) 3px, rgba(0,0,0,0) 4px);
+}
+@media (prefers-reduced-motion: reduce) { .rar-hero .rar-rain { animation: none; } }
+
+/* ---- thumbnail cards (Latest) ---- */
+[data-md-color-scheme="slate"] .md-typeset .grid.cards > ul > li { overflow: hidden; }
+.rar-thumb {
+  position: relative; overflow: hidden; height: 128px;
+  margin: -.8rem -.8rem 1rem;      /* bleed to the card edges */
+  background: linear-gradient(140deg, #1b1815, #100f0d);
+  border-bottom: 1px solid var(--rar-line);
+}
+.rar-thumb::before {           /* diagonal stripes */
+  content: ""; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,.028), rgba(255,255,255,.028) 11px, transparent 11px, transparent 22px);
+}
+.rar-thumb::after {            /* amber corner glow */
+  content: ""; position: absolute; right: -40px; bottom: -40px; width: 150px; height: 150px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(255,157,61,.28), transparent 68%);
+}
+.rar-kind {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: .13em;
+  text-transform: uppercase; padding: 5px 9px; border-radius: 6px;
+  background: rgba(13,12,11,.72); border: 1px solid var(--rar-line); color: var(--rar-acc);
+}

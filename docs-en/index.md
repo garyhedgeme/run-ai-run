@@ -5,6 +5,9 @@ hide:
 ---
 
 <div class="rar-hero" markdown>
+<div class="rar-floor"></div>
+<div class="rar-rain"></div>
+<div class="rar-scan"></div>
 <span class="rar-eyebrow">Public notes · working with coding agents</span>
 
 # Run the agent.<br><span class="glow">Run the notes.</span>
